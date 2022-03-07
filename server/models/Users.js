@@ -19,6 +19,10 @@ const UserSchema = new mongoose.Schema({
     },
     username: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     }
 })
+
+const UserModel = mongoose.model("user", UserSchema)
+module.exports = UserModel
