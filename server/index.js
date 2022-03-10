@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
-const UserModel =  require("./models/Users")
+const UserModel =  require("./models/User")
 const bodyParser = require("body-parser");
 // const cors = require("cors")
 
@@ -14,9 +14,12 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+
+const db = require("./config/keys").mongoURI;
+
 mongoose
 .connect(
-  "mongodb+srv://fortuneonyeka:ogubuike4@cluster0.qpbvw.mongodb.net/carsrentaldb?retryWrites=true&w=majority",
+  db,
    { useNewUrlParser: true }).then(() => console.log("MongoDB successfully connected"))
    .catch(err => console.log(err));
 
