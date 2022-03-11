@@ -76,5 +76,15 @@ User.findOne({username: req.body.username}).then(user => {
   }
 
   //Chcek password
+  bcrypt.compare(password, user.password).then(isMatch => {
+    if (isMatch) {
+      // User matched
+        // Create JWT Payload
+        const Payload = {
+          id: user.id,
+          name: user.name
+        }
+    }
+  })
 })
 })
