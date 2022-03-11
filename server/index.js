@@ -3,11 +3,17 @@ const app = express()
 const mongoose = require("mongoose")
 const UserModel =  require("./models/User")
 const bodyParser = require("body-parser");
+const passport = require("passport")
+const users = require("../routes/api/users")
 // const cors = require("cors")
 
 
 // app.use(cors())
 // app.use(express.json())
+
+const app = express();
+
+// Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
     extended: false
