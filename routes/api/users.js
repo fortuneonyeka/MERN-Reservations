@@ -72,7 +72,7 @@ const username = req.body.username
 //find user by username
 User.findOne({username: req.body.username}).then(user => {
   if (!user) {
-    res.status(400).json({username:"Username does not exists"})
+    res.status(400).json({usernameIncorrect:"Username does not exists"})
   }
 
   //Chcek password
@@ -84,7 +84,23 @@ User.findOne({username: req.body.username}).then(user => {
           id: user.id,
           name: user.name
         }
+        //Signin Token
+        jwt.sign(Payload, keys.secretOrKey, {
+          expiresIn:31556926
+        },
+        (err, token) => {
+          res.json({
+            success: true,
+            token: "Bearer " + token
+          });
+        }
+        );
+    }else {
+      return res.status(400).json({passwordIncorrect: "Password is Incorrect"})
     }
+
   })
 })
 })
+
+module.exports = router;
