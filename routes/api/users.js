@@ -27,9 +27,9 @@ router.post("/register", (req, res) => {
      res.status(400).json(errors)
    }
 
-   User.findOne({email:req.body.email}).then(user => {
+   User.findOne({username:req.body.username}).then(user => {
      if (user) {
-       res.status(400).json({email:"Email exists already"})
+       res.status(400).json({username:"Username exists already"})
      }else {
        const newUser = new User({
          name: req.body.name,
@@ -50,3 +50,31 @@ router.post("/register", (req, res) => {
      }
    });
 });
+
+
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
+router.post("/login", (req, res) => {
+//Form Vlidation
+const {errors, isValid} = validationLoginInput(req.body)
+
+//check validation
+
+if (!isValid) {
+  return res.status(400).json(errors)
+}
+
+const email = req.body.email
+const password = req.body.password
+const username = req.body.username
+
+//find user by username
+User.findOne({username: req.body.username}).then(user => {
+  if (!user) {
+    res.status(400).json({username:"Username does not exists"})
+  }
+
+  //Chcek password
+})
+})
