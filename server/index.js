@@ -29,16 +29,25 @@ mongoose
    { useNewUrlParser: true }).then(() => console.log("MongoDB successfully connected"))
    .catch(err => console.log(err));
 
+
+   // Passport middleware
+   app.use(passport.initialize())
+
+   //passport config
+   require("../config/passport")(passport)
+
+   //Routes
+   app.use("/api/users", users);
    
-app.get("/getUser", (req, res)=> {
-  UserModel.find({}, (err, result) => {
-    if (err) {
-      res.json(err)
-    }else{
-      res.json(result)
-    }
-  })
-})
+// app.get("/getUser", (req, res)=> {
+//   UserModel.find({}, (err, result) => {
+//     if (err) {
+//       res.json(err)
+//     }else{
+//       res.json(result)
+//     }
+//   })
+// })
 
 
 // const port = process.env.PORT || 3001;
