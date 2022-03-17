@@ -3,15 +3,16 @@ const app = express()
 const mongoose = require("mongoose")
 const UserModel =  require("./models/User")
 const bodyParser = require("body-parser");
-const passport = require("passport")
+const passport = require("passport-jwt")
 const users = require("../routes/api/users")
+
+
 // const cors = require("cors")
 
 
 // app.use(cors())
-// app.use(express.json())
+app.use(express.json())
 
-const app = express();
 
 // Bodyparser middleware
 app.use(
@@ -50,10 +51,10 @@ mongoose
 // })
 
 
-// const port = process.env.PORT || 3001;
-// app.listen(port, ()=> {
-//   console.log(`Server is running successfully @ ${port}`)
-// })
-app.listen(3001, () => {
-  console.log(" THE SERVER IS RUNNING PERFECTLY");
+const port = process.env.PORT || 3001;
+app.listen(port, ()=> {
+  console.log(`Server is running successfully @ ${port}`)
 })
+// app.listen(3001, () => {
+//   console.log(" THE SERVER IS RUNNING PERFECTLY");
+// })
